@@ -7,7 +7,7 @@ import PopularMovies from '@components/sections/PopularMovies';
 import LeftNavBar from '@components/navigation/LeftNavBar';
 import LatestMovies from '@components/sections/LatestMovies';
 import ActionMovies from '@components/sections/ActionMovies';
-import { RootStackParamList } from '../navigation/RootNavigator';
+import { RootStackParamList } from '@navigation/RootNavigator';
 import ErrorScreen from '@components/ErrorScreen';
 import LoadingScreen from '@components/LoadingScreen';
 import { Screen } from '@shared/components/Screen';

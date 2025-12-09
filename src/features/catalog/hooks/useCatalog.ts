@@ -1,1 +1,1 @@
-export * from '../../hooks/useCatalog';
+export * from '@hooks/useCatalog';

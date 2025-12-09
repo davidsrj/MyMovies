@@ -1,1 +1,1 @@
-export { default } from '../../components/ErrorScreen';
+export { default } from '@components/ErrorScreen';

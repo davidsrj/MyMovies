@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import Video from 'react-native-video';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../navigation/RootNavigator';
+import type { RootStackParamList } from '@navigation/RootNavigator';
 import type { Item } from '@shared/types/catalog';
 import { Screen } from '@shared/components/Screen';
 import BackButton from '@components/buttons/BackButton';

@@ -3,8 +3,8 @@ import { FlatList, Text, View, ScrollView } from 'react-native';
 import { Item } from '@shared/types/catalog';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/RootNavigator';
-import MovieCard from '../cards/MovieCard';
+import MovieCard from '@components/cards/MovieCard';
+import { RootStackParamList } from '@navigation/RootNavigator';
 
 type Props = {
   movies: Item[];

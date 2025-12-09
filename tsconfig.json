@@ -7,6 +7,9 @@
       "@features/*": ["src/features/*"],
       "@shared/*": ["src/shared/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@assets/*": ["assets/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@screens/*": ["src/screens/*"],
       "@components/*": ["src/components/*"]
     }
   },

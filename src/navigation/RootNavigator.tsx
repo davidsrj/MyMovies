@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '../screens/DetailsScreen';
-import PlayerScreen from '../screens/PlayerScreen';
-import type { Item } from '../shared/types/catalog';
+import HomeScreen from '@screens/HomeScreen';
+import DetailsScreen from '@screens/DetailsScreen';
+import PlayerScreen from '@screens/PlayerScreen';
+import type { Item } from '@shared/types/catalog';
 
 export type RootStackParamList = {
   Home: undefined;
