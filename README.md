@@ -1,97 +1,178 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MyMovies
 
-# Getting Started
+MyMovies is a React Native demo app optimized for Android TV that lets you browse a catalog of movies, view details, and play trailers.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+This document explains how to set up the project, run it on an Android TV emulator, run tests, and understand the main libraries and current limitations.
 
-## Step 1: Start Metro
+## Prerequisites
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- macOS
+- Node.js 20+ (see `"engines"` in `package.json`)
+- Yarn or npm (examples below use npm)
+- Java JDK 17 (recommended for React Native 0.82)
+- Android Studio with:
+	- Android SDK Platform 34 (or close)
+	- Android TV system image (e.g. **Android TV (Google APIs) x86_64**)
+	- Android SDK Tools and Platform Tools in your `PATH` (`adb`, `emulator`)
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+If you haven’t set up Android for React Native before, follow the official guide and ensure `ANDROID_HOME` / `ANDROID_SDK_ROOT` are configured.
 
-```sh
-# Using npm
+## Install dependencies
+
+From the project root:
+
+```bash
+npm install
+```
+
+If you prefer yarn:
+
+```bash
+yarn install
+```
+
+## Running on Android TV emulator
+
+### 1. Create an Android TV virtual device
+
+In Android Studio:
+
+1. Open **Device Manager**.
+2. Click **Create Device…**.
+3. Choose **TV > Android TV (1080p)** or similar.
+4. Select a system image with **Google APIs** (recommended x86_64 image).
+5. Finish the wizard.
+
+### 2. Start the Android TV emulator
+
+You can start it from Android Studio’s Device Manager, or from the terminal:
+
+```bash
+emulator -avd <Your_Android_TV_AVD_Name>
+```
+
+Wait until the emulator is fully booted before continuing (home screen is responsive).
+
+### 3. Run the Metro bundler (optional but explicit)
+
+In one terminal from the project root:
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+This runs Metro on the default port (8081).
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### 4. Build and run the Android app on the TV emulator
 
-### Android
+In another terminal, still in the project root:
 
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+This will:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+- Build the Android app via the React Native CLI.
+- Install it on the running emulator.
+- Launch **MyMovies** on the Android TV home screen.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+If multiple devices are connected, you may need to use `adb` to target the TV emulator explicitly.
 
-```sh
-bundle install
+## Running tests
+
+The project uses **Jest** with **@testing-library/react-native** for unit and integration tests.
+
+To run the full test suite:
+
+```bash
+npm test
 ```
 
-Then, and every time you update your native dependencies, run:
+Jest configuration lives in `jest.config.js`, and setup (including React Native Testing Library configuration) is in `jest.setup.js`. Test files are under `__tests__/`.
 
-```sh
-bundle exec pod install
-```
+## Main libraries and why they’re used
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### Runtime
 
-```sh
-# Using npm
-npm run ios
+- **react / react-native** – Core framework for building the cross-platform mobile/TV UI.
 
-# OR using Yarn
-yarn ios
-```
+- **@react-navigation/native** and **@react-navigation/native-stack** – Handles navigation between screens such as Home, Details, and Player, with a simple stack-style experience that works well on TV.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+- **react-native-screens** – Native-backed screen components for better performance and memory usage with React Navigation.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- **react-native-safe-area-context** – Manages safe areas (e.g. top/bottom insets) so layouts look correct on different devices and TVs.
 
-## Step 3: Modify your app
+- **react-native-vector-icons** – Icon library used for consistent icons (e.g. play/back) without custom image assets.
 
-Now that you have successfully run the app, let's make changes!
+- **react-native-video** – Video playback for trailers or movie content, supporting TV-style playback behavior.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+- **nativewind** + **tailwindcss** – Utility-first styling in React Native components, making it fast to build responsive, consistent UIs with className-based styles.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Tooling and testing
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+- **jest** – JavaScript/TypeScript test runner used for unit and integration tests.
 
-## Congratulations! :tada:
+- **@testing-library/react-native** & **@testing-library/jest-native** – Encourages testing components via their behavior and UI, similar to how a user would interact with them.
 
-You've successfully run and modified your React Native App. :partying_face:
+- **react-test-renderer** – Used by Jest to render components in tests.
 
-### Now what?
+- **typescript** & **@types/*** – Adds static typing for safer refactors and better IDE support.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- **eslint** & **@react-native/eslint-config** – Linting for consistent code style and catching common issues.
 
-# Troubleshooting
+- **prettier** – Automatic code formatting.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- **@react-native/babel-preset**, **@babel/*** – Babel configuration to compile modern JavaScript/TypeScript for React Native.
 
-# Learn More
+- **@react-native/metro-config** – Metro bundler configuration for React Native.
 
-To learn more about React Native, take a look at the following resources:
+## Project structure
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- `App.tsx` – Application entry point.
+- `src/navigation/RootNavigator.tsx` – Sets up navigation between screens.
+- `src/screens/` – Screen components:
+	- `HomeScreen.tsx` – Movie list / browsing.
+	- `DetailsScreen.tsx` – Movie details.
+	- `PlayerScreen.tsx` – Video playback.
+- `src/components/` – Reusable UI components such as:
+	- `cards/MovieCard.tsx`
+	- `buttons/PlayButton.tsx`, `buttons/PlayerBackButton.tsx`
+	- `header/HomeHeader.tsx`, `header/DetailsHeader.tsx`
+	- `sections/PopularMovies.tsx`
+	- `wrappers/MainWrapper.tsx`
+- `src/hooks/useCatalog.ts` – Catalog hook (reads data from `assets/catalog.json`).
+- `assets/catalog.json` – Static movie catalog data.
+- `__tests__/` – Jest tests (components, hooks, screens, and integration flow).
+
+## Known limitations
+
+- **Android TV focused**: The UX and navigation are optimized for Android TV. While the app can run on phones/tablets, focus/remote navigation patterns are primarily tuned for TV.
+
+- **Static data**: Movie catalog is loaded from a local JSON file (`assets/catalog.json`); there is no backend or network layer.
+
+- **Limited error handling**: Minimal handling for video playback errors, missing assets, or malformed catalog entries.
+
+- **No offline/download support**: All content is assumed to be available locally or via streaming; no download or offline management is implemented.
+
+- **Accessibility**: Basic semantics are present, but full accessibility (screen readers, focus indicators, etc.) has not been fully audited.
+
+## TODOs / Possible improvements
+
+- Add real API integration for the catalog (e.g., pagination, search, filtering by genre).
+
+- Improve TV remote navigation (focus management, remembering last focused item, better d-pad behavior).
+
+- Add favorites/watchlist feature persisted to local storage.
+
+- Enhance player controls (seek, subtitles, audio tracks, progress bar).
+
+- Expand test coverage, especially around navigation flows and edge cases.
+
+- Add CI workflow to run tests and lint checks on each commit/PR.
+
+- Improve accessibility support and validate on a range of TV devices.
+
+## License
+This project is provided as a demo/sample; adapt the licensing section to your needs before publishing.
+# MyMovies
