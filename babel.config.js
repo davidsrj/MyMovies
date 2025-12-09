@@ -14,7 +14,7 @@ module.exports = function (api) {
             '@features': './src/features',
             '@shared': './src/shared',
             '@hooks': './src/hooks',
-            '@assets': '/assets',
+            '@assets': './assets',
             '@navigation': './src/navigation',
             '@screens': './src/screens',
             '@components': './src/components',
