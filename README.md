@@ -1,5 +1,7 @@
 # MyMovies
 
+![MyMovies app intro](assets/MyMoviesAppIntro.gif)
+
 MyMovies is a React Native demo app optimized for Android TV that lets you browse a catalog of movies, view details, and play trailers.
 
 This document explains how to set up the project, run it on an Android TV emulator, run tests, and understand the main libraries and current limitations.
